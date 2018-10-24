@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+ <!--@copyright Copyright (c) 2016 www.tigren.com-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Tigren_Dailydeal::css/dailydeal_sidebar.css"/>
+    </head>
+    <body>
+    	<referenceBlock name="header.links">
+            <block class="Tigren\Dailydeal\Block\HeaderLink" name="dailydeal-header-link" template="dailydeal_header_link.phtml" 
+                ifconfig="dailydeal/general/enable" before="-"/>
+        </referenceBlock>
+        <referenceContainer name="sidebar.main">
+            <block class="Tigren\Dailydeal\Block\Sidebar" name="dailydeal_sidebar" template="dailydeal_sidebar.phtml"
+                ifconfig="dailydeal/general/enable" cacheable="false" before="-" />
+        </referenceContainer>
+    </body>
+</page>

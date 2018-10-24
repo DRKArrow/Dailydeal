@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+ <!--@copyright Copyright (c) 2016 www.tigren.com-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Tigren_Dailydeal::dailydeal" title="Dailydeal" module="Tigren_Dailydeal" sortOrder="20" resource="Tigren_Dailydeal::dailydeal" />
+        <add id="Tigren_Dailydeal::manage_deals" title="Manage Deals" module="Tigren_Dailydeal" sortOrder="1" parent="Tigren_Dailydeal::dailydeal" resource="Tigren_Dailydeal::manage_deals" action="dailydeal/deal" />
+        <add id="Tigren_Dailydeal::manage_subscribers" title="Manage Subscribers" module="Tigren_Dailydeal" sortOrder="2" parent="Tigren_Dailydeal::dailydeal" resource="Tigren_Dailydeal::manage_subscribers" action="dailydeal/subscriber" />
+        <add id="Tigren_Dailydeal::settings" title="Settings" module="Tigren_Dailydeal" sortOrder="3" parent="Tigren_Dailydeal::dailydeal" resource="Tigren_Dailydeal::settings" action="adminhtml/system_config/edit/section/dailydeal" />
+    </menu>
+</config>

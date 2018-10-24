@@ -1,0 +1,68 @@
+<!--@copyright Copyright (c) 2016 www.tigren.com-->
+<?php
+$helper = $block->getHelper();
+$productId = $block->getRequest()->getParam('id');
+$deal = $block->getDealForProduct($productId);
+if ($deal->getId() && $deal->isAvailable()) {
+    $product = $block->getProduct();
+
+    if ($product && $product->getId()) {
+        $remainQuantity = $deal->getQuantity() - $helper->getSoldQuantity($product);
+        $productQuantity = $helper->getProductQuantity($product);
+
+        if ($productQuantity <= 0) {
+            $leftText = __('Sorry, this product is sold out!');
+        } else {
+            if ($remainQuantity < $productQuantity) {
+                $leftText = __('For only ' . $remainQuantity . ' item(s)!');
+            } else {
+                $leftText = __('Until Out of Stock');
+            }
+        }
+        $endTime = strtotime($deal->getEndTime());
+        ?>
+        <div class="product-view-deal">
+            <div class="deal-time-info">
+                <?php if ($block->getScopeConfig('dailydeal/product_detail/is_show_saving')) { ?>
+                    <h3 class="saving"><?php echo __('Saving: ') . $helper->calSaving($product) . __('%'); ?></h3>
+                <?php } ?>
+                <h4 class="dealtime-label"><?php echo $block->getScopeConfig('dailydeal/product_detail/timeleft_label'); ?></h4>
+                <div class="timeleft-product" data-totime="<?php echo $endTime; ?>"></div>
+                <h5><?php echo $leftText; ?></h5>
+                <script type="text/javascript">
+                    require(['jquery', 'dailydeal_countdown'], function ($) {
+                        $(document).ready(function () {
+                            $('.timeleft-product').dealcountdown();
+                        });
+                    });
+                </script>
+            </div>
+            <?php if ($block->getScopeConfig('dailydeal/general/show_share_buttons')) { ?>
+                <table>
+                    <tr class="social-sharing">
+                        <!-- facebook -->
+                        <td class="td-facebook">
+                            <div class="fb-share-button" data-href="<?php echo $product->getProductUrl(); ?>"
+                                 data-type="button_count"></div>
+                        </td>
+                        <!-- twitter -->
+                        <td>
+                            <a class="twitter-share-button" data-url="<?php echo $product->getProductUrl(); ?>"></a>
+                        </td>
+                        <!-- Google+ -->
+                        <td>
+                            <div class="g-plusone" data-href="<?php echo $product->getProductUrl(); ?>"
+                                 data-size="medium"></div>
+                        </td>
+                    </tr>
+                </table>
+            <?php } ?>
+        </div>
+    <?php } ?>
+<?php } ?>
+
+<style type="text/css">
+    .td-facebook {
+        padding-right: 30px;
+    }
+</style>

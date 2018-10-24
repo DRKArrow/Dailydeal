@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+ <!--@copyright Copyright (c) 2016 www.tigren.com-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="left">
+            <block class="Tigren\Dailydeal\Block\Adminhtml\Subscriber\Edit\Tabs" name="dailydeal_subscriber_edit_tabs">
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Tigren\Dailydeal\Block\Adminhtml\Subscriber\Edit" name="dailydeal_subscriber_edit"/>
+        </referenceContainer>
+    </body>
+</page>

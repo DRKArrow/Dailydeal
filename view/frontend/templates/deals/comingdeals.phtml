@@ -1,0 +1,133 @@
+<!--@copyright Copyright (c) 2016 www.tigren.com-->
+<?php
+$limit = $block->getLimit();
+$deals = $block->getComingDealCollection()->limit($limit);
+if ($deals->getSize()) {
+    $helper = $block->getHelper();
+    $prdCount = 1;
+    $isLimit = false;
+    ?>
+    <ul class="deal-grid">
+        <?php
+        foreach ($deals->getItems() as $deal) {
+            if ($prdCount > $limit) {
+                $isLimit = true;
+                break;
+            }
+            $deal->load($deal->getId());
+            $productIds = $deal->getProductIds();
+            foreach ($productIds as $productId) {
+                if ($prdCount > $limit) {
+                    $isLimit = true;
+                    break;
+                }
+                $product = $helper->getProductById($productId);
+                if($product->getTypeId() == 'simple') {
+                    continue;
+                }
+                if ($product && $product->getId() && $product->getVisibility() != 1) {
+                    $prdCount++;
+                    $remainQuantity = $deal->getQuantity() - $helper->getSoldQuantity($product);
+                    $productQuantity = $helper->getProductQuantity($product);
+                    if ($product->getTypeId() == 'configurable') {
+                        $childProduct = $helper->getProductById($product->getId() - 1);
+                        $productQty = $helper->getProductQuantity($childProduct);
+                        if ($productQty <= 0) {
+                            $leftText = __('Sorry, this product is sold out!');
+                        } elseif ($remainQuantity < $productQty) {
+                            $leftText = __('For only ' . $remainQuantity . ' item(s)!');
+                        } else {
+                            $leftText = __('Until Out of Stock');
+                        }
+                    }
+                    elseif ($product->getTypeId() == 'downloadable'){
+                        if($remainQuantity > 0){
+                            $leftText = __('For only ' . $remainQuantity . ' item(s)!');
+                        }
+                        else{
+                            $leftText = __('Until Out of Stock');
+                        }
+                    }
+                    else {
+                        if ($productQuantity <= 0) {
+                            $leftText = __('Sorry, this product is sold out!');
+                        } else {
+                            if ($remainQuantity < $productQuantity) {
+                                $leftText = __('For only ' . $remainQuantity . ' item(s)!');
+                            } else {
+                                $leftText = __('Until Out of Stock');
+                            }
+                        }
+                    }
+
+                    $startTime = strtotime($deal->getStartTime());
+                    ?>
+                    <li class="item">
+                        <a href="<?php echo $product->getProductUrl(); ?>" title="<?php echo $product->getName(); ?>"
+                           class="product-image">
+                            <img src="<?php echo $helper->getProductImageUrl($product, 'category'); ?>"
+                                 alt="<?php echo $product->getName() ?>"/>
+                            <div class="save-price">
+                                <div class="price"><?php echo $helper->calSaving($product); ?><?php echo __('%'); ?></div>
+                            </div>
+                        </a>
+                        <h4 class="product-name">
+                            <a href="<?php echo $product->getProductUrl() ?>"
+                               title="<?php echo $product->getName() ?>"><?php echo $product->getName() ?></a>
+                        </h4>
+                        <?php if ($product->getTypeId() == 'configurable') { ?>
+                            <div class="deal-price">
+                                <div class="price-box">
+                                    <label><?php echo __('Price:') ?> </label>
+                                    <span class="special-price"><?php echo $helper->getPriceWithCurrency($deal->getPrice()); ?></span>
+                                    <span class="old-price"><span class="price"><?php echo $helper->getPriceWithCurrency($product->getPriceInfo()->getPrice('regular_price')->getMinRegularAmount()->getValue()); ?></span></span>
+                                </div>
+                            </div>
+                            <?php
+                        } else {
+                            ?>
+                            <div class="deal-price">
+                                <div class="price-box">
+                                    <p class="special-price">
+                                        <span class="price"><?php echo $helper->getPriceWithCurrency($deal->getPrice()); ?></span>
+                                    </p>
+                                    <p class="old-price">
+                                        <span class="price"><?php echo $helper->getPriceWithCurrency($product->getPrice()); ?></span>
+                                    </p>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                        <h4><?php echo $leftText; ?></h4>
+                        <span class="timeleft-coming" data-totime="<?php echo $startTime; ?>"> </span>
+                    </li>
+                    <?php
+                }
+
+            }
+
+        }
+        ?>
+    </ul>
+    <script type="text/javascript">
+        require(['jquery', 'dailydeal_countdown'], function ($) {
+            $(document).ready(function () {
+                $('.timeleft-coming').dealcountdown();
+            });
+        });
+    </script>
+    <?php
+    if ($isLimit || $deals->getSize() > $limit) {
+        ?>
+        <div class="see-all">
+            <a href='<?php echo $block->getUrl('dailydeal/index/coming'); ?>'>
+                <?php echo __('See all coming deals ...'); ?>
+            </a>
+        </div>
+        <?php
+    }
+} else {
+    ?>
+    <p class="note-msg"><?php echo __('There are no deals available.') ?></p>
+<?php } ?>

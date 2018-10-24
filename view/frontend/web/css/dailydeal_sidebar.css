@@ -1,0 +1,23 @@
+/* SIDEBAR */
+.block-todaydeals .block-title h3 {color:#3399cc;}
+#sidebar-deal-list tr{text-align: center;}
+/*#sidebar-deal-list tr td {border:1px solid #cccccc;}*/
+#sidebar-deal-list .product-deal-image{width:100%; text-align:center;}
+#sidebar-deal-list .product-deal-name{width:100%; text-align:center; margin:5px 0;}
+#sidebar-deal-list td img{
+    width:88px;
+    height:109px;
+}
+#sidebar-deal-list .deal-price{margin:5px 0; font-weight:normal;}
+#sidebar-deal-list .deal-price .old-price{font-size:18px; color: #a0a0a0; text-decoration: line-through; padding-left: 5px;}
+#sidebar-deal-list .deal-price .special-price{font-size:18px; color: #3399cc; padding-left: 5px; font-weight: 600;}
+#sidebar-deal-list .save-price {margin:5px 0; font-weight:normal; color:#636363;}
+#sidebar-deal-list .save-price .price{font-size:18px; padding-left: 5px; font-weight:600;}
+
+/*Countdown*/
+#sidebar-deal-list .timeleft-block {margin-bottom: 10px;}
+#sidebar-deal-list .timeleft-block label {font-weight: 600;}
+#sidebar-deal-list .dailydeal-countdown{width:100%; text-align:center; margin:0 0 10px; padding: 0;}
+#sidebar-deal-list .dailydeal-countdown li{display:inline; zoom:1; display:inline-block; padding:0; margin:0; text-align:center;}
+#sidebar-deal-list .dailydeal-countdown li .timeleft-value{font-size:15px; font-family:Arial; line-height:1.55; font-weight:bold; color:#000;}
+#sidebar-deal-list .dailydeal-countdown li .timeleft-label{font-size:10px; float:left; width:100%; clear:both; color:#333; font-weight:bold; text-transform:uppercase;}

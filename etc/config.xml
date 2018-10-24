@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+ <!--@copyright Copyright (c) 2016 www.tigren.com-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <dailydeal>
+            <general>
+                <enable>1</enable>
+                <show_previous_deals>1</show_previous_deals>
+                <show_coming_deals>1</show_coming_deals>
+                <show_share_buttons>1</show_share_buttons>
+                <sharing_template_message>Hurry Up! %s are on SALE before %s GMT on %s</sharing_template_message>
+                <deal_per_page>9</deal_per_page>
+                <show_on_sidebar>1</show_on_sidebar>
+                <num_of_sidebar_deals>6</num_of_sidebar_deals>
+                <is_round_saving>1</is_round_saving>
+                <apply_is_deal>1</apply_is_deal>
+            </general>
+            <subscription>
+                <allow_subscribe>1</allow_subscribe>
+                <email_sender>general</email_sender>
+                <confirm_email_template>dailydeal_subscription_confirm_email_template</confirm_email_template>
+                <email_template>dailydeal_subscription_email_template</email_template>
+                <intro_message>Please enter your email to receive notification about daily deals.</intro_message>
+            </subscription>
+            <product_detail>
+                <is_show_saving>1</is_show_saving>
+                <timeleft_label>TIME LEFT</timeleft_label>
+            </product_detail>
+        </dailydeal>
+    </default>
+</config>

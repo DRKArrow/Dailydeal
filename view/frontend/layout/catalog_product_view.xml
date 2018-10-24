@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Tigren_Dailydeal::css/dailydeal.css" />
+    </head>
+    <body>
+        <referenceContainer name="product.info.extrahint">
+            <block class="Tigren\Dailydeal\Block\Product\Deal" name="dailydeal.product.social"
+                   ifconfig="dailydeal/general/enable" cacheable="false"
+                   template="product/social.phtml" before="product.info.addtocart" />
+            <block class="Tigren\Dailydeal\Block\Product\Deal" name="dailydeal.product.deal"
+                   ifconfig="dailydeal/general/enable" cacheable="false"
+                   template="product/deal.phtml" after="dailydeal.product.social" />
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+ <!--@copyright Copyright (c) 2016 www.tigren.com-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--Override Model-->
+    <preference for="Magento\Catalog\Model\ResourceModel\Product" type="Tigren\Dailydeal\Model\Catalog\ResourceModel\Product" />
+    
+    <!--Plugin-->
+    <type name="Magento\Catalog\Block\Product\ListProduct">
+        <plugin name="tigren-dailydeal-block-product-list" 
+                type="Tigren\Dailydeal\Plugin\BlockProductList" sortOrder="1"/>
+    </type>
+    <type name="Magento\Checkout\Controller\Cart\UpdateItemOptions">
+        <plugin name="tigren-dailydeal-controller-cart-updateitem" 
+                type="Tigren\Dailydeal\Plugin\UpdateItemOptions" sortOrder="2"/>
+    </type>
+    <type name="Magento\Checkout\Controller\Cart\UpdatePost">
+        <plugin name="tigren-dailydeal-controller-cart-updatepost" 
+                type="Tigren\Dailydeal\Plugin\UpdatePost" sortOrder="3"/>
+    </type>
+    <type name="Magento\Checkout\Model\GuestPaymentInformationManagement">
+        <plugin name="tigren-dailydeal-validate-place-order-guest"
+                type="Tigren\Dailydeal\Plugin\GuestPlaceOrder" sortOrder="4"/>
+    </type>
+    <type name="Magento\Checkout\Model\PaymentInformationManagement">
+        <plugin name="tigren-dailydeal-validate-place-order"
+                type="Tigren\Dailydeal\Plugin\PlaceOrder" sortOrder="5"/>
+    </type>
+    <type name="Magento\Checkout\Controller\Sidebar\UpdateItemQty">
+        <plugin name="tigren-dailydeal-controller-cart-updateqty"
+                type="Tigren\Dailydeal\Plugin\UpdateItemQty" sortOrder="6"/>
+    </type>
+    
+    <virtualType name="DailydealGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    
+    <!--Deal-->
+    <preference for="Tigren\Dailydeal\Api\Data\DealInterface" type="Tigren\Dailydeal\Model\Deal" />
+    <virtualType name="DealGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Tigren\Dailydeal\Model\Resource\Deal\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">DailydealGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Tigren\Dailydeal\Model\ResourceModel\Deal\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">tigren_dailydeal_deal</argument>
+            <argument name="resourceModel" xsi:type="string">Tigren\Dailydeal\Model\ResourceModel\Deal</argument>
+        </arguments>
+    </virtualType>
+    
+    <!--Subscriber-->
+    <preference for="Tigren\Dailydeal\Api\Data\SubscriberInterface" type="Tigren\Dailydeal\Model\Subscriber" />
+    <virtualType name="SubscriberGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Tigren\Dailydeal\Model\Resource\Subscriber\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">DailydealGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Tigren\Dailydeal\Model\ResourceModel\Subscriber\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">tigren_dailydeal_subscriber</argument>
+            <argument name="resourceModel" xsi:type="string">Tigren\Dailydeal\Model\ResourceModel\Subscriber</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="dailydeal_deal_listing_data_source" xsi:type="string">Tigren\Dailydeal\Model\ResourceModel\Deal\Grid\Collection</item>
+                <item name="dailydeal_subscriber_listing_data_source" xsi:type="string">Tigren\Dailydeal\Model\ResourceModel\Subscriber\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    
+</config>

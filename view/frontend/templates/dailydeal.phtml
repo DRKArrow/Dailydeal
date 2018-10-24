@@ -1,0 +1,76 @@
+<div class="grid-deals">
+    <?php if ($block->getScopeConfig('dailydeal/subscription/allow_subscribe')) { ?>
+        <div class="daily-deal-subscription">
+            <a class="fancybox" href="#subscription-popup" title="" id="get_notified_daily_deal">
+                <strong><?php echo __("Get notified of daily deals"); ?></strong>
+            </a>
+        </div>
+    <?php } ?>
+    <div class="all-deals">
+        <div id="today-deals">
+            <h3 class="deal-label"><?php echo __('Today Deals') ?></h3>
+            <div class="list-deals">
+                <?php echo $block->getChildHtml('dailydeal_today_deal'); ?>
+            </div>
+        </div>
+        <?php if ($block->getScopeConfig('dailydeal/general/show_coming_deals')) { ?>
+            <div id="coming-deals">
+                <h3 class="deal-label"><?php echo __('Coming Deals') ?></h3>
+                <div class="list-deals">
+                    <?php echo $block->getChildHtml('dailydeal_coming_deal'); ?>
+                </div>
+            </div>
+        <?php } ?>
+        <?php if ($block->getScopeConfig('dailydeal/general/show_previous_deals')) { ?>
+            <div id="previous-deals">
+                <h3 class="deal-label"><?php echo __('Previous Deals') ?></h3>
+                <div class="list-deals">
+                    <?php echo $block->getChildHtml('dailydeal_previous_deal'); ?>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+<?php if ($block->getScopeConfig('dailydeal/subscription/allow_subscribe')) { ?>
+    <div id="subscription-popup" style="display:none;">
+        <div class="subscribe-result-message" id="subscribe-result-message"></div>
+        <!--<div id="subscribe-form-ajax" style="display:none;">&nbsp;</div>-->
+        <form action="<?php echo $block->getUrl('dailydeal/subscribe/subscribe', ['_secure' => true]); ?>" method="post"
+              id="dailydeal-subscription-form">
+            <div class="subscription-form">
+                <h5 class="intro-msg"><?php echo $block->getScopeConfig('dailydeal/subscription/intro_message'); ?></h5>
+                <div class="field first">
+                    <label for="customer_name" class="required"><?php echo __('Your Name'); ?><em>*</em></label>
+                    <div class="input-box">
+                        <input type="text" name="customer_name" class="required-entry input-text"/>
+                    </div>
+                </div>
+                <div class="field last">
+                    <label for="email" class="required"><?php echo __('Your Email'); ?><em>*</em></label>
+                    <div class="input-box">
+                        <input type="text" name="email" class="required-entry input-text validate-email"/>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button class="button right action primary" id="dailydeal-subscribe-button"
+                            type="submit"><?php echo __('Submit'); ?></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        require(['jquery', 'mage/mage', 'fancybox'], function ($) {
+            $(document).ready(function () {
+                $('#dailydeal-subscription-form').mage('validation', {});
+
+                $('.fancybox').fancybox({
+                    helpers: {
+                        title: null
+                    }
+                });
+
+            });
+        });
+    </script>
+<?php } ?>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+ <!--@copyright Copyright (c) 2016 www.tigren.com-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="dailydeal_subscription_confirm_email_template" label="Default Dailydeal Confirm Email Template" file="default_subscription_email.html" type="html" module="Tigren_Dailydeal" area="frontend"/>
+    <template id="dailydeal_subscription_email_template" label="Default Dailydeal Email Template" file="daily_notity_email.html" type="html" module="Tigren_Dailydeal" area="frontend"/>
+</config>
+

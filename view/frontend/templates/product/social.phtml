@@ -1,0 +1,72 @@
+<!--@copyright Copyright (c) 2016 www.tigren.com-->
+<?php
+if ($block->getScopeConfig('dailydeal/general/show_share_buttons')) {
+    $helper = $block->getHelper();
+    $productId = $block->getRequest()->getParam('id');
+    $deal = $block->getDealForProduct($productId);
+    if ($deal->getId() && $deal->isAvailable()) {
+        $product = $block->getProduct();
+        if ($product && $product->getId()) {
+            $endTime = strtotime($deal->getEndTime());
+
+            $messageTemplate = $block->getScopeConfig('dailydeal/general/sharing_template_message');
+            if (!$messageTemplate) {
+                $messageTemplate = __('Hurry Up! %s are on SALE before %s GMT on %s');
+            }
+            $message = sprintf($messageTemplate, $product->getName(), date('H:i:s', $endTime),
+                date('d D-M-Y', $endTime));
+            ?>
+
+            <script type="text/javascript">
+                require(['jquery'], function ($) {
+                    $(document).ready(function () {
+                        $('meta[property="og:title"],meta[property="og:description"]').attr('content', '<?php echo $message; ?>');
+                    });
+                });
+            </script>
+
+            <!-- facebook -->
+            <div id="fb-root"></div>
+            <script>(function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id))
+                        return;
+                    js = d.createElement(s);
+                    js.id = id;
+                    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            </script>
+
+            <!-- twitter -->
+            <script>!function (d, s, id) {
+                    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                    if (!d.getElementById(id)) {
+                        js = d.createElement(s);
+                        js.id = id;
+                        js.src = p + '://platform.twitter.com/widgets.js';
+                        fjs.parentNode.insertBefore(js, fjs);
+                    }
+                }(document, 'script', 'twitter-wjs');
+            </script>
+
+            <!-- Google + Place this tag after the last +1 button tag. -->
+            <script type="text/javascript">
+                (function () {
+                    var po = document.createElement('script');
+                    po.type = 'text/javascript';
+                    po.async = true;
+                    po.src = 'https://apis.google.com/js/platform.js';
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(po, s);
+                })();
+            </script>
+
+            <meta property="og:title" content="<?php echo $message; ?>"/>
+            <meta property="og:description" content="<?php echo $message ?>"/>
+            <?php
+
+        }
+    }
+}
+?>

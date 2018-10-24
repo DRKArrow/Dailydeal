@@ -1,0 +1,3 @@
+Title,Price,Quantity,Product Ids,Start Time,End Time,Stores
+Deal Test 1,27,50,2035,2/16/2017 4:08,2/21/2017 4:08,1
+Deal Test 2,20,30,"2033, 2034",2/16/2017 4:08,3/29/2017 4:08,"0,1"

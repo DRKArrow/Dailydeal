@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+ <!--@copyright Copyright (c) 2016 www.tigren.com-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd">
+    <router id="admin"> <!-- This part is different from frontend -->
+        <route id="dailydeal" frontName="dailydeal">
+            <module name="Tigren_Dailydeal" />
+        </route>
+    </router>
+</config>

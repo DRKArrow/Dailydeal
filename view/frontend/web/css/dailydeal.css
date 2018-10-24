@@ -1,0 +1,257 @@
+p#product-attribute-specs-table{
+    width:100%;
+}
+#product-attribute-specs-table tr td{padding:10px 0;}
+#product-attribute-specs-table tr.last td{border:0 none;}
+#product-attribute-specs-table td img{
+    width:265px;
+    height:250px;
+}
+#product-attribute-specs-table .product-name a{font-size:30px; font-weight:bold; color:#1c9dd0; text-decoration:none;}
+#product-attribute-specs-table .short-desc{font-size:14px; font-weight:normal; color:#636363;}
+.deal-price{float:left; width:100%; margin:5px 0;}
+.price-statistic{
+    float:left;
+    padding:5px;
+    margin-right:10px;
+}
+.price-statistic label{float:left;}
+.price-statistic .price{float:left;font-weight:bold;}
+.deal-time{float:left; width:100%;margin:0 0 10px;}
+.deal-time .deal-share ul li {float:left; margin: 0 5px;}
+
+.deal-time label{color:#FD9000; font-size:16px; font-weight:bold;}
+.deal-time h4{font-size:18px;color:#2f2f2f; text-align:center;}
+.deal-time h4 label{color:#FD9000; font-size:37px; font-family: 'DS-Digital'; }
+.deal-time h4 label,.deal-time .deal-share label{font-size:30px;}
+.deal-time h5{color:#38A8FA; font-size:18px; margin:6px 0 0;}
+.deal-time button.btn-cart::-moz-focus-inner { padding:0; border:0; } /* FF Fix */
+.deal-time button.btn-cart { -webkit-border-fit:lines; } /* <- Safari & Google Chrome Fix */
+.deal-time button.btn-cart{ overflow:visible; width:auto; border:0 none; padding:0; margin:0; background:transparent; cursor:pointer;}
+.deal-time button.btn-cart span { height:37px;line-height:37px; border:0; padding:0; background:url(../../images/dailydeal/btn-buy-now.png) 0 0 no-repeat; width:95px; text-align:center;}
+.deal-time button.btn-cart span span {background:0 none; color:#996633; font-size:16px; font-weight:normal;}
+
+/* Grid Mode */
+.title-buttons{text-align:right;}
+.title-buttons h1, .title-buttons h2, .title-buttons h3, .title-buttons h4, .title-buttons h5, .title-buttons h6{float:left;}
+.grid-deals {position: relative;}
+.grid-deals .daily-deal-subscription {position: absolute; top:20px; right: 10px;}
+.grid-deals #today-deals,.grid-deals #coming-deals,.grid-deals #previous-deals{float:left; width:100%; margin:0 0 10px;}
+.grid-deals #today-deals h3,.grid-deals #coming-deals h3,.grid-deals #previous-deals h3{font-size:18px; font-weight:normal;}
+.grid-deals .list-deals {padding: 15px;}
+.grid-deals .list-deals ul {padding-left:0}
+.grid-deals .list-deals ul li{position:relative}
+.grid-deals .list-deals .product-info{background:#FFFFFF; border:1px solid #cccccc; text-align:center; border-radius:5px; overflow:hidden; position:relative; padding:1px;}
+.grid-deals .list-deals .product-info .product-image{display:block; margin:10px auto; width:135px; border:0 none;}
+.grid-deals .list-deals .product-info .product-name{min-height:2.7em; font-size:15px; font-weight:bold; color:#666666; margin:0 0 10px; padding:0 10px;}
+.grid-deals .list-deals .product-info .product-name a{color:#666666; text-decoration:none;}
+.grid-deals .list-deals .product-info .product-name a:hover{color:#fd9000; text-decoration:none;}
+.grid-deals .list-deals .product-info .deal-info{background:#F1F1F1; padding:10px; margin:0; overflow:hidden;}
+.grid-deals .list-deals .product-info .deal-price{margin:0;}
+.grid-deals .list-deals .product-info .deal-price .price-deal, .grid-deals .list-deals .product-info .deal-price .price-value{display:inline; padding:0 5px;}
+.grid-deals .list-deals .product-info .deal-price .price{font-size:20px; color:#bb2626;}
+.grid-deals .list-deals .product-info .deal-price .price-value .price{text-decoration:line-through;}
+.grid-deals .list-deals .item  .save-price {
+    background: url(../images/dailydeal/icon-sale.png) no-repeat scroll left top transparent;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.grid-deals .list-deals .item a img {width: 100%;}
+.grid-deals .list-deals .item .save-price .price{
+    font-size:16px;
+    color:#FFFFFF;
+    margin: 15px 0 0 5px;
+    text-align: left;
+}
+.grid-deals .list-deals .product-info .deal-time{margin:0;}
+.grid-deals .list-deals .product-info .deal-time h5{font-size:13px; color:#666666;}
+.grid-deals .list-deals .see-all {text-align: center; padding-top: 10px;}
+.grid-deals .toolbar {margin-bottom: 17px;}
+.grid-deals .toolbar .pager .pages, .grid-deals .pager .limiter{display:inline;}
+
+.grid-deals .availability.available-soon, .availability.out-of-stock {
+    color: #df280a;
+}
+.grid-deals .availability {
+    margin-bottom: 0;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+.grid-deals .availability.out-of-stock span { 
+    color: #a0a0a0;
+}
+ul.deal-grid {list-style-type: none;}
+
+.deal-grid {
+    position: relative;
+    margin-bottom: 0;
+    clear: both;
+}
+
+.deal-grid:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.deal-grid > li {
+    position: relative;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.deal-grid > li:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+/*Deal Image*/
+.deal-grid .product-image {
+    position: relative;
+    display: block;
+    border: 1px solid #ededed;
+    width: 100%;
+}
+.deal-grid .product-image:hover {
+    border-color: #3399cc;
+}
+
+/*Price Box - Special*/
+.deal-grid .price-box {
+    color: #a0a0a0;
+    font-size: 13px;
+    margin: 0 0 5px;
+}
+
+.price-box .old-price,
+.price-box .special-price {
+    display: inline-block;
+}
+.price-box .special-price {
+    font-weight: bold;
+}
+.price-box .old-price .price-label,
+.price-box .special-price .price-label {
+    display: none;
+}
+.price-box .old-price .price,
+.price-box .special-price .price {
+    display: inline-block;
+}
+
+.price-box .old-price .price {
+    color: #a0a0a0;
+    text-decoration: line-through;
+}
+
+.price-box .special-price {
+    color: #3399cc;
+    padding-left: 1em;
+}
+.price-box .special-price .price-label {
+    color: #D84D3C;
+}
+.price-box .price {
+    color: #3399cc;
+    font-size: 16px;
+}
+
+
+/* Config: Two columns + flexible gutter */
+.deal-grid > li {
+    float: left;
+    width: 47.72727%;
+    margin-right: 4.54545%;
+}
+.deal-grid > li:nth-child(odd) {
+    clear: left;
+}
+.deal-grid > li:nth-child(even) {
+    margin-right: 0;
+}
+@media only screen and (min-width: 480px) {
+    /* Config: Three columns + flexible gutter */
+    .deal-grid {
+        /* Undo two-column config */
+        /* Set three-column config */
+    }
+    .deal-grid > li:nth-child(odd) {
+        clear: none;
+    }
+    .deal-grid > li:nth-child(even) {
+        margin-right: 3.7037%;
+    }
+    .deal-grid > li {
+        width: 30.8642%;
+        margin-right: 3.7037%;
+    }
+    .deal-grid > li:nth-child(3n+1) {
+        clear: left;
+    }
+    .deal-grid > li:nth-child(3n) {
+        margin-right: 0;
+    }
+}
+@media (max-width: 480px) {
+    .grid-deals .list-deals ul li, .grid-deals .list-deals ul li.first, 
+    .grid-deals .list-deals ul li.last{ float:left; width:100%; margin:0 0 15px; }
+}
+@media (min-width: 481px) and (max-width: 600px) {
+    .grid-deals .list-deals ul li, .grid-deals .list-deals ul li.first, 
+    .grid-deals .list-deals ul li.last{ float:left; width:100%; margin:0 0 15px; }
+}
+
+
+/***** Subscription popup *****/
+#subscription-popup { display: none; min-width: 240px; min-height:150px; max-width:320px; text-align:left;}
+#subscribe-form-ajax {
+    height:150px;
+    background:url(../../images/dailydeal/ajax-loader.gif) center center no-repeat;
+    z-index:999;
+}
+#newsletter-subscription-popup {position: fixed; width: 300px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); background: #FFFFFF; padding:20px; border-radius:5px;}
+#newsletter-subscription-popup .dailydeal-subscription-popup {display:block; position:relative;}
+#newsletter-subscription-popup .dailydeal-subscription-popup .close-popup{position:absolute; top:-40px; right:-40px;}
+#newsletter-subscription-popup .dailydeal-subscription-popup p.intro-msg{color: #FD9000; font-weight: bold; font-size:13px;}
+#newsletter-subscription-popup .dailydeal-subscription-popup .input-box {width:100%; float:left; margin:0 0 6px;}
+#newsletter-subscription-popup .dailydeal-subscription-popup .input-box .validation-advice{margin-left:70px;}
+#newsletter-subscription-popup .dailydeal-subscription-popup .input-box label{min-width:70px; float:left; font-weight:bold; color:#666666}
+#newsletter-subscription-popup .dailydeal-subscription-popup .input-box input.input-text {float:left; width:220px; margin:0 0 3px;}
+#newsletter-subscription-popup .dailydeal-subscription-popup .actions {clear:both; padding-top:15px; }
+#subscription-popup #subscribe-result-message {color:#EB340A; font-weight:bold; text-align:center;}
+@media (max-width: 480px) and (orientation:portrait){
+    .form-list .input-box{width:194px;}
+    .form-list input.input-text{width:190px;}
+}
+
+#dailydeal-subscription-form .intro-msg {text-transform: uppercase;}
+#dailydeal-subscription-form .field em {color:red;}
+#dailydeal-subscription-form .field {margin-bottom: 10px;}
+
+/*Product Detail*/
+.product-view-deal > table {margin-bottom: 20px;}
+.product-view-deal .deal-time-info {
+    text-align:left;
+    padding:10px; 
+    margin-top: -50px;
+}
+.product-view-deal .deal-time-info .saving {color:red; font-size: 2.5rem;}
+.product-view-deal .dealtime-label{ color:#FD9000; text-align:left; font-size: 2.0rem;}
+.product-view-deal .dailydeal-countdown{width:100%; text-align:left; margin:0 0 10px;}
+.product-view-deal .deal-time-info > h5 {font-size: 1.5rem;}
+.product-view-deal .dailydeal-countdown li .timeleft-value{font-size:20px;}
+.product-view-deal .dailydeal-countdown li .timeleft-label{font-size:14px;}
+
+/*Countdown*/
+.dailydeal-countdown li .timeleft-value{font-size:15px; font-family:Arial; line-height:1.55; font-weight:bold; color:#000;}
+.dailydeal-countdown li .timeleft-label{font-size:11px; float:left; width:100%; clear:both; color:#333;  font-weight:bold; text-transform:uppercase;}
+
+.dailydeal-countdown{width:100%; text-align:center; margin:0 0 10px; padding: 0;}
+.dailydeal-countdown li{display:inline; zoom:1; display:inline-block; padding:0; margin:0; text-align:center;}
+
+.dailydeal-cat.timeleft-block {margin-top: -25px;}
+
+.timeleft-cat .dailydeal-countdown li .timeleft-label {font-size:8px;}

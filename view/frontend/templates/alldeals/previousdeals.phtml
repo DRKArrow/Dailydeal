@@ -1,0 +1,65 @@
+<!--@copyright Copyright (c) 2016 www.tigren.com-->
+<div class="grid-deals">
+    <div class="all-deals">
+        <div class="toolbar"><?php echo $block->getPagerHtml(); ?></div>
+        <div id="previous-deals">
+            <div class="list-deals">
+                <?php
+                $deals = $block->getPagedDeals();
+                if ($deals->getSize()) {
+                    $helper = $block->getHelper();
+                    $prdCount = 0;
+                    ?>
+                    <ul class="deal-grid">
+                        <?php
+                        foreach ($deals->getItems() as $deal) {
+                            $deal->load($deal->getId());
+                            $productIds = $deal->getProductIds();
+                            foreach ($productIds as $productId) {
+                                $product = $helper->getProductById($productId);
+                                if ($product && $product->getId()) {
+                                    $prdCount++;
+                                    ?>
+                                    <li class="item">
+                                        <a href="<?php echo $product->getProductUrl(); ?>"
+                                           title="<?php echo $product->getName(); ?>" class="product-image">
+                                            <img src="<?php echo $helper->getProductImageUrl($product, 'category'); ?>"
+                                                 alt="<?php echo $product->getName() ?>"/>
+                                            <div class="save-price">
+                                                <div class="price"><?php echo $helper->calSaving($product); ?><?php echo __('%'); ?></div>
+                                            </div>
+                                        </a>
+                                        <h4 class="product-name">
+                                            <a href="<?php echo $product->getProductUrl() ?>"
+                                               title="<?php echo $product->getName() ?>"><?php echo $product->getName() ?></a>
+                                        </h4>
+                                        <div class="deal-price">
+                                            <div class="price-box">
+                                                <p class="special-price">
+                                                    <span class="price"><?php echo $helper->getPriceWithCurrency($deal->getPrice()); ?></span>
+                                                </p>
+                                                <p class="old-price">
+                                                    <span class="price"><?php echo $helper->getPriceWithCurrency($product->getPrice()); ?></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <p class="availability out-of-stock">
+                                            <span><?php echo __('Sorry, this deal was sold out!'); ?></span></p>
+                                    </li>
+                                    <?php
+                                }
+                            }
+                        }
+                        ?>
+                    </ul>
+                    <div><?php echo __('There are ' . $prdCount . ' previous deal product(s)'); ?></div>
+                    <?php
+                } else {
+                    ?>
+                    <p class="note-msg"><?php echo __('There are no deals available.') ?></p>
+                <?php } ?>
+            </div>
+        </div>
+        <div class="toolbar"><?php echo $block->getPagerHtml(); ?></div>
+    </div>
+</div>

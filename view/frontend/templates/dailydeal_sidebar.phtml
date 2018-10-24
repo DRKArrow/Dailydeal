@@ -1,0 +1,146 @@
+<!--@copyright Copyright (c) 2016 www.tigren.com-->
+<?php
+
+use Magento\Framework\App\Action\Action;
+
+if ($block->getScopeConfig('dailydeal/general/show_on_sidebar')) {
+    $limit = $block->getLimit();
+    $deals = $block->getTodayDealCollection()->limit($limit);
+    ?>
+    <?php
+    if ($deals->getSize()) {
+        $helper = $block->getHelper();
+        $prdCount = 1;
+        $isLimit = false;
+        ?>
+        <div class="block block-todaydeals">
+            <div class="block-title"><h3><?php echo __('Today Deals'); ?></h3></div>
+            <div class="block-content">
+                <table id="sidebar-deal-list">
+                    <?php
+                    foreach ($deals->getItems() as $deal) {
+                        if ($prdCount > $limit) {
+                            $isLimit = true;
+                            break;
+                        }
+                        $deal->load($deal->getId());
+                        $productIds = $deal->getProductIds();
+                        foreach ($productIds as $productId) {
+                            if ($prdCount > $limit) {
+                                $isLimit = true;
+                                break;
+                            }
+                            $product = $helper->getProductById($productId);
+                            if ($product && $product->getId() && $product->getVisibility() != 1) {
+                                $prdCount++;
+                                $endTime = strtotime($deal->getEndTime());
+                                ?>
+                                <tr>
+                                    <td>
+                                        <div class="product-deal-image">
+                                            <a href="<?php echo $product->getProductUrl(); ?>"
+                                               title="<?php echo $product->getName(); ?>">
+                                                <img src="<?php echo $helper->getProductImageUrl($product, 'small'); ?>"
+                                                     alt="<?php echo $product->getName(); ?>"/>
+                                            </a>
+                                        </div>
+                                        <div class="product-deal-name">
+                                            <a href="<?php echo $product->getProductUrl(); ?>"
+                                               title="<?php echo $product->getName(); ?>">
+                                                <?php echo $product->getName(); ?>
+                                            </a>
+                                        </div>
+                                        <?php if ($product->getTypeId() == 'configurable') { ?>
+                                            <div class="deal-price">
+                                                <div class="price-box">
+                                                    <label><?php echo __('Price:') ?> </label>
+                                                    <span class="special-price"><?php echo $helper->getPriceWithCurrency($deal->getPrice()); ?></span>
+                                                    <span class="old-price"><?php echo $helper->getPriceWithCurrency($product->getPriceInfo()->getPrice('regular_price')->getMinRegularAmount()->getValue()); ?></span>
+                                                </div>
+                                            </div>
+                                            <?php
+                                        } else {
+                                            ?>
+                                            <div class="deal-price">
+                                                <div class="price-box">
+                                                    <p class="special-price">
+                                                        <span class="price"><?php echo $helper->getPriceWithCurrency($deal->getPrice()); ?></span>
+                                                    </p>
+                                                    <p class="old-price">
+                                                        <span class="price"><?php echo $helper->getPriceWithCurrency($product->getPrice()); ?></span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <?php
+                                        }
+                                        ?>
+                                        <div class="save-price">
+                                            <label><?php echo __('Saving:') ?> </label>
+                                            <span class="price"><?php echo $helper->calSaving($product); ?><?php echo __('%'); ?></span>
+                                        </div>
+                                        <div class="timeleft-block">
+                                            <label><?php echo __('DEAL TIME') ?></label>
+                                            <span class="timeleft-sidebar"
+                                                  data-totime="<?php echo $endTime; ?>"> </span>
+                                        </div>
+                                        <?php
+                                        if ($product->isSaleable()) {
+                                            $addToCartParams = $block->getAddToCartPostParams($product);
+                                            ?>
+                                            <div class="actions-primary">
+                                                <form data-role="tocart-form"
+                                                      action="<?php echo $addToCartParams['url']; ?>"
+                                                      method="post">
+                                                    <input type="hidden" name="product"
+                                                           value="<?php echo $addToCartParams['product']; ?>">
+                                                    <input type="hidden"
+                                                           name="<?php echo Action::PARAM_NAME_URL_ENCODED; ?>"
+                                                           value="<?php echo $addToCartParams[Action::PARAM_NAME_URL_ENCODED]; ?>">
+                                                    <input name="form_key" type="hidden"
+                                                           value="<?php echo $addToCartParams['formkey']; ?>">
+                                                    <button type="submit" title="<?php echo __('Add to Cart'); ?>"
+                                                            class="action tocart primary">
+                                                        <span><?php echo __('Add to Cart'); ?></span>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        <?php } ?>
+
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+
+                        }
+
+                    }
+                    if ($isLimit || $deals->getSize() > $limit) {
+                        ?>
+                        <tr>
+                            <td>
+                                <div class="see-all">
+                                    <a href='<?php echo $block->getUrl('dailydeal/index/today'); ?>'>
+                                        <?php echo __('See all today deals ...'); ?>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </table>
+                <script type="text/javascript">
+                    require(['jquery', 'dailydeal_countdown'], function ($) {
+                        $(document).ready(function () {
+                            $('.timeleft-sidebar').dealcountdown();
+                        });
+                    });
+                </script>
+            </div>
+        </div>
+        <?php
+    } else {
+        ?>
+        <p><?php echo __('There is no deal available today'); ?></p>
+    <?php } ?>
+<?php } ?>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+ <!--@copyright Copyright (c) 2016 www.tigren.com-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Tigren\Dailydeal\Block\Adminhtml\Deal\Report" name="dailydeal_deal_report" template="report.phtml" />
+        </referenceContainer>
+    </body>
+</page>
